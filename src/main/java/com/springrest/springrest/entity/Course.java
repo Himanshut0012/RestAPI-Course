@@ -1,56 +1,43 @@
 package com.springrest.springrest.entity;
 
-import javax.annotation.Generated;
-import javax.persistence.Column;
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.Size;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @Entity
 @Table(name = "course")
-public class Course 
-{
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
- // @Column(name = "Id")
-  private long id;
- // @Column(name = "title")
-  private String title;
-  private String description;
-public Course(long id, String title, String description) {
-	super();
-	this.id = id;
-	this.title = title;
-	this.description = description;
-}
-public Course() {
-	super();
-	// TODO Auto-generated constructor stub
-}
-public long getId() {
-	return id;
-}
-public void setId(long id) {
-	this.id = id;
-}
-public String getTitle() {
-	return title;
-}
-public void setTitle(String title) {
-	this.title = title;
-}
-public String getDescription() {
-	return description;
-}
-public void setDescription(String description) {
-	this.description = description;
-}
-@Override
-public String toString() {
-	return "Course [id=" + id + ", title=" + title + ", description=" + description + "]";
-}
-  
-  
+@Data
+@NoArgsConstructor
+@RequiredArgsConstructor
+public class Course {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+	
+	
+	@Size(min = 6)
+	private String title;
+	
+	
+	private String description;
+	
+	@Future
+	@NonNull
+	private Date duration;
+	
+	
+
+	
+
 }
