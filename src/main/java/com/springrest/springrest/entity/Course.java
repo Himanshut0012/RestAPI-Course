@@ -26,13 +26,13 @@ public class Course {
 	private long id;
 	
 	
-	@Size(min = 6)
+	@Size(min = 2,message = "{ string have minimum character 2 }")
 	private String title;
 	
 	
 	private String description;
 	
-	@Future
+	@Future(message = "{ date must be in future }")
 	@NonNull
 	private Date duration;
 	
