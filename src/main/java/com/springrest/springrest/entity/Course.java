@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import lombok.Data;
@@ -26,13 +27,14 @@ public class Course {
 	private long id;
 	
 	
-	@Size(min = 6)
+	@Size(min = 1, message = "{minimum string char size is 1}")
+	@NotNull
 	private String title;
 	
 	
 	private String description;
 	
-	@Future
+	@Future(message = "{Date must be in future}")
 	@NonNull
 	private Date duration;
 	
