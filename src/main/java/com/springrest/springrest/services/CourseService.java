@@ -7,9 +7,9 @@ import com.springrest.springrest.entity.Course;
 
 public interface CourseService 
 {
-  public List<Course> getCourses(int pageNo, int pageSize);
+  public List<CourseDto> getCourses(int pageNo, int pageSize);
   
-  public Course getCourseById(long courseId);
+  public CourseDto getCourseById(long courseId);
   
   public Course addCourse(Course course);
   

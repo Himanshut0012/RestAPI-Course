@@ -28,7 +28,7 @@ public class CourseServiceimpl implements CourseService {
 
 
 	@Override
-	public List<Course> getCourses(int pageNo, int pageSize) {
+	public List<CourseDto> getCourses(int pageNo, int pageSize) {
 //        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 //		modelMapper.getConfiguration().setAmbiguityIgnored(true);
 //		List<Course> courses= courseDao.findAll();
@@ -41,18 +41,21 @@ public class CourseServiceimpl implements CourseService {
 		Pageable p = PageRequest.of(pageNo, pageSize);
 		Page<Course> pageCourse = courseDao.findAll(p);
 		List<Course> courses = pageCourse.getContent();
-		return courses;
+		List<CourseDto> courseDto = courses.stream()
+				.map( course -> modelMapper.map(course, CourseDto.class)).collect(Collectors.toList());
+		
+		return courseDto;
 	}
 
 	@Override
-	public Course getCourseById(long courseId) {
+	public CourseDto getCourseById(long courseId) {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		Course course=  courseDao.findById(courseId).orElse(null);
-//		CourseDto courseDto = modelMapper.map(course, CourseDto.class);
+		CourseDto courseDto = modelMapper.map(course, CourseDto.class);
 //		System.out.println(courseDto);
 		 if(course==null)
 				throw new CourseNotFoundException("course id "+courseId+" not present");
-		 return course;
+		 return courseDto;
 		
 		
 			

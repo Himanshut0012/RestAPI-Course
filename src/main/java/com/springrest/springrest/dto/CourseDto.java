@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -18,11 +19,12 @@ import lombok.RequiredArgsConstructor;
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
-@ApiModel(description = "CourseDTO model ")
-@JsonFilter("courseDto")
+//@ApiModel(description = "CourseDTO model ")
+//@JsonFilter("courseDto")
 public class CourseDto {
 	
 //	@NotNull
+//	@JsonIgnore
 	private long id;
 	
 	@Size(min = 2,message = "{ string have minimum character 2 }")

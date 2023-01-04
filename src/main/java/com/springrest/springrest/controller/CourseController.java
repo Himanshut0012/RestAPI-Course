@@ -43,7 +43,8 @@ public class CourseController {
 
 	@GetMapping("/courses")
 //	@ApiIgnore                                 // ignore that api , did show on ui page
-	public List<Course> getCourses(@RequestParam(value = "pageNo",defaultValue = "0",required = false) int pageNo,
+	public List<CourseDto> getCourses(
+			@RequestParam(value = "pageNo",defaultValue = "0",required = false) int pageNo,
 			@RequestParam(value = "pageSize", defaultValue = "10",required = false) int pageSize ) {
 		return this.courseService.getCourses(pageNo, pageSize);
 	}
@@ -54,12 +55,19 @@ public class CourseController {
 	  @ApiResponse(code = 200, message = "Successfully retrieved"),
 	  @ApiResponse(code = 404, message = "Not found - The product was not found")
 	})
-	public EntityModel<	Course> getCourseById(@PathVariable Long courseId) {
-		Course course = this.courseService.getCourseById(courseId);
-		EntityModel<Course> resource = EntityModel.of(course);
+//	public EntityModel<	CourseDto> getCourseById(@PathVariable Long courseId) {
+//		CourseDto course = this.courseService.getCourseById(courseId);
+//		EntityModel<CourseDto> resource = EntityModel.of(course);
+//		WebMvcLinkBuilder link=WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getCourses(0, 10)); 
+//		resource.add(link.withRel("all-courses")); 
+//		return resource;
+//	}
+	public CourseDto getCourseById(@PathVariable Long courseId) {
+		CourseDto course = this.courseService.getCourseById(courseId);
+		EntityModel<CourseDto> resource = EntityModel.of(course);
 		WebMvcLinkBuilder link=WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getCourses(0, 10)); 
 		resource.add(link.withRel("all-courses")); 
-		return resource;
+		return course;
 	}
 
 	@PostMapping("/courses")
